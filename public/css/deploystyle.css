@@ -1,0 +1,207 @@
+.output {
+  padding: 0;
+}
+
+/* Mode toggle styles */
+.mode-toggle {
+  display: none;
+}
+
+.mode-label {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+  background-color: #777;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.mode-label::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.mode-toggle:checked + .mode-label {
+  background-color: #222;
+}
+
+.mode-toggle:checked + .mode-label::after {
+  transform: translateX(30px);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #222;
+  color: #fff;
+}
+
+.output.dark-mode {
+  background-color: #333;
+}
+
+/* Dark mode styles for tab1 */
+.ui-tabs.dark-mode {
+  background-color: #444;
+  color: #000;
+}
+
+/* Dark mode styles for all text */
+body.dark-mode,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode textarea,
+body.dark-mode div,
+body.dark-mode a,
+body.dark-mode label {
+  color: #fff;
+}
+
+.mode-toggle + .mode-label.dark-mode::after {
+  background-color: #222;
+}
+
+.outputtext {
+  max-width: 500px;
+}
+
+.outputtext2 {
+  max-width: 100%;
+  word-break: break-all; /* optional */
+}
+
+input[type="text"],
+textarea {
+  width: 500px;
+}
+
+/* Add responsive styles */
+@media (max-width: 600px) {
+  #tabs {
+    width: auto !important;
+    margin: 0 10px;
+  }
+
+  .output {
+    font-size: 14px;
+  }
+
+  .outputtext {
+    width: 90%;
+    word-break: break-all; /* optional */
+  }
+
+  input[type="text"],
+  textarea {
+    width: 90%;
+  }
+}
+
+pre {
+  overflow: auto;
+  background-color: #ffffff;
+  padding: 5px;
+  max-width: 800px;
+  color: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.center {
+  text-align: center;
+}
+
+.title {
+  margin-top: 0;
+}
+
+.divider {
+  border-top: 3px solid #bbb;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+.form-group .button-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.form-group .button-container button {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  margin-right: 10px; /* Added spacing between buttons */
+}
+
+.form-group .button-container .cancel-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label,
+  .form-group input[type="text"] {
+    width: 100%;
+  }
+
+  .form-group .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-group .button-container button {
+    margin-top: 10px;
+    margin-right: 0; /* Reset margin-right for mobile layout */
+  }
+}

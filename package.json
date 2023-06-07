@@ -1,0 +1,45 @@
+{
+  "name": "s5-deployCenter-js-dev",
+  "version": "0.1.0-beta4",
+  "description": "Simple S5 DeployCenter in Javascript",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && webpack --config ./webpack.config.js",
+    "webpack": "npx webpack --config ./webpack.config.js",
+    "start": "yarn build && webpack serve --config webpack.dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parajbs-dev/s5-deploycenter-js-dev.git"
+  },
+  "author": "parajbs-dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parajbs-dev/s5-deploycenter-js-dev/issues"
+  },
+  "homepage": "https://github.com/parajbs-dev/s5-deploycenter-js-dev",
+  "dependencies": {
+    "@babel/runtime": "^7.17.8",
+    "file-saver": "^2.0.5",
+    "crypto-browserify": "3.12.0",
+    "path-browserify": "1.0.1",
+    "stream-browserify": "3.0.0",
+    "s5client-js": "https://github.com/parajbs-dev/s5client-js.git#test_14"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "babel-loader": "^8.2.4",
+    "copy-webpack-plugin": "^9.0.1",
+    "rimraf": "^3.0.2",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2",
+    "webpack-dev-server": "^4.13.3",
+    "webpack-merge": "^5.8.0"
+  }
+}

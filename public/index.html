@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S5-deployCenter</title>
+    <link rel="stylesheet" href="/css/jquery-ui.css" />
+    <link rel="stylesheet" href="/css/deploystyle.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/s5client.js"></script>
+    <script src="/config.js"></script>
+  </head>
+  <body>
+    <center><h1>--- S5 - deployCenter ---</h1></center>
+    <hr style="border-top: 3px solid #bbb" />
+
+    <div class="container">
+      <div class="center">
+        <button id="account-button" class="accountbtn">Account</button>
+        <button id="logout-button" class="logoutbtn hidden">Logout</button>
+      </div>
+      <div id="input-section" class="hidden">
+        <div class="form-group">
+          <center><label for="s5portal-input">S5-Portal-Url</label></center>
+          <input type="text" id="s5portal-input" class="loginInput" />
+        </div>
+        <div class="form-group">
+          <center><label for="authToken-input">Auth-Token</label></center>
+          <input type="text" id="authToken-input" class="loginInput" />
+        </div>
+        <div class="form-group">
+          <div class="button-container">
+            <button id="login-button" class="loginbtn">Login</button>
+            <button id="cancel-button" class="cancelbtn hidden">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border-top: 3px solid #bbb" />
+    <br />
+
+    <input type="checkbox" id="mode-toggle" class="mode-toggle" />
+    <label for="mode-toggle" class="mode-label"></label>
+
+    <div id="tabs">
+      <ul>
+        <li>
+          <a href="#tab1" onclick="clearAllElements()">Uploader/Downloader</a>
+        </li>
+        <li>
+          <a href="#tab2" onclick="clearAllElements()">Webapp Uploader</a>
+        </li>
+        <li><a href="#tab3" onclick="clearAllElements()">Pin/Delete</a></li>
+        <li><a href="#tab4" onclick="clearAllElements()">Cid Tools</a></li>
+        <li><a href="#tab5" onclick="clearAllElements()">Utils</a></li>
+      </ul>
+      <div id="tab1">
+        <center><h3>Uploader/Downloader</h3></center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>File Uploader / File Downloader</h2>
+          Select a File to upload, Upload start automatic:<br />
+          <input type="file" id="file-input" /><br /><br />
+          <button id="download-button" class="btn">Download</button>
+          <div id="outputUploadCid" class="output"></div>
+          <div id="outputUploadUrl" class="output"></div>
+          <br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Upload From Url</h2>
+          Input the Url to File to upload: (Url require)<br />
+          <input type="text" id="uploadFromUrl-input" /><br /><br />
+          <button id="uploadFromUrl-button" onclick="uploadFromUrl()" class="btn">Upload from Url</button>
+          <div id="outputUploadFromUrlCid" class="output"></div>
+          <div id="outputUploadFromUrlUrl" class="output"></div>
+          <br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Data Uploader</h2>
+          Data-to-upload: (require)<br />
+          <textarea type="text" id="dataToUpload-input"></textarea>
+          <br /><br />
+          Name-of-File-From-Data: (require)<br />
+          <input type="text" id="dataNAME-input" /><br /><br />
+          <button id="dataUpload-btn" onclick="uploadData()" class="btn">Upload</button>
+          <br />
+          <div id="outputData" class="output"></div>
+          <br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Data Downloader</h2>
+          Cid-from-uploaded-Data: (Cid require)<br />
+          <input type="text" id="downloadDataCid-input" /><br /><br />
+          <button id="dataDownload-btn" onclick="downloadData()" class="btn">Download Data</button>
+          <br />
+          <div id="outputDownloadData" class="output"></div>
+          <br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Directory Downloader to ZIP</h2>
+          Directory-Download-Url: (Url require)<br />
+          <input type="text" id="directoryURL-input" />
+          <br /><br />
+          Directory/Zip Name: (not require)<br />
+          <input type="text" id="directoryNAME-input" /><br /><br />
+          <button id="directory-btn" onclick="downloadDir()" class="btn">Download</button>
+          <br /><br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Directory Uploader</h2>
+          Select a directory to upload:<br />
+          <input
+            type="file"
+            id="directory-input"
+            onchange="selectFolder(event)"
+            webkitdirectory
+            mozdirectory
+            msdirectory
+            odirectory
+            directory
+            multiple
+          /><br /><br />
+          <button id="directoryUp-btn" onclick="uploadDir()" class="btn">Upload</button>
+          <br />
+          <br />
+          <div id="outputURL" class="output"></div>
+          <br />
+          <br />
+          <div id="output" class="output"></div>
+          <br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+      </div>
+
+      <div id="tab2">
+        <center><h3>Webapp Uploader</h3></center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Webapp Upload</h2>
+          Select a Webapp directory to upload:<br />
+          <input
+            type="file"
+            id="webapp-inputFile"
+            onchange="selectWebappFolder(event)"
+            webkitdirectory
+            mozdirectory
+            msdirectory
+            odirectory
+            directory
+            multiple
+          />
+          <br /><br />
+          Custom Webapp Name: (not require) <br />
+          <input type="text" id="webappDirName-input" placeholder="webApp-name" />
+          <br /><br />
+          Custom Webapp Index: (not require, default is "index.html") <br />
+          <input type="text" id="webappIndex-input" placeholder="index.html" />
+          <br /><br />
+          Custom Webapp ErrorPage: (not require, default is "404.html") <br />
+          <input type="text" id="webappErrorPage-input" placeholder="404.html" />
+          <br /><br />
+          <button id="webappUp-btn" onclick="uploadWebapp()" class="btn">Upload Webapp</button>
+          <br />
+          <div id="outputWebappURL" class="output"></div>
+          <br />
+          <div id="outputWebapp" class="output"></div>
+          <br />
+        </center>
+
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+      </div>
+
+      <div id="tab3">
+        <center><h3>Pin/Delete</h3></center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Pin Cid</h2>
+          Input a S5 Cid for pinning: (Cid require)<br />
+          <input type="text" id="pinCid-input" /><br /><br />
+          <button id="pinCid-button" onclick="pinCid()" class="btn">pin Cid</button>
+          <div id="outputPinCid" class="output"></div>
+          <br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Delete Cid</h2>
+          Input a S5 Cid for delete: (Cid require)<br />
+          <input type="text" id="deleteCid-input" /><br /><br />
+          <button id="deleteCid-button" onclick="deleteCid()" class="btn">delete Cid</button>
+          <div id="outputDeleteCid" class="output"></div>
+          <br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+      </div>
+
+      <div id="tab4">
+        <center><h3>Cid Tools</h3></center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>get All Cid Infos from S5 Cid</h2>
+          Input a S5 Cid: (Cid require)<br />
+          <input type="text" id="allcidsFromCid-input" /><br /><br />
+          <button id="allcidsFromCid-button" onclick="getAllInfosFromCid()" class="btn">get Infos</button>
+        </center>
+        <div id="outputAllcidsFromCid" class="outputtext2"></div>
+        <br /><br />
+
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>S5 Cid to mHash (base64url)</h2>
+          Input a S5 Cid: (Cid require)<br />
+          <input type="text" id="cidTOmhash-input" /><br /><br />
+          <button id="cidTOmhash-button" onclick="getCidTOmHash()" class="btn">get mHash</button>
+          <div id="outputCidTOmhashData" class="output"></div>
+          <br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>S5 Cid to B3hash (hex)</h2>
+          Input a S5 Cid: (Cid require)<br />
+          <input type="text" id="cidTOb3hash-input" /><br /><br />
+          <button id="cidTOb3hash-button" onclick="getb3hashHex()" class="btn">get B3hash</button>
+          <div id="outputCidTOb3hash" class="output"></div>
+          <br /><br />
+        </center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+      </div>
+
+      <div id="tab5">
+        <center><h3>Utils</h3></center>
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+
+        <center>
+          <h2>Get Metadata for Cid</h2>
+          Input a S5 Cid: (Cid require)<br />
+          <input type="text" id="metadataFromCid-input" /><br /><br />
+          <button id="metadataFromCid-button" onclick="getMetadataFromCid()" class="btn">get Metadata</button>
+        </center>
+        <div id="outputMetadataFromCid" class="outputmeta"></div>
+        <br /><br />
+
+        <hr style="border-top: 3px dotted #bbb" />
+        <br />
+      </div>
+    </div>
+
+    <script src="/js/deployscripts.js"></script>
+  </body>
+</html>
